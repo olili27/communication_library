@@ -1,0 +1,6 @@
+1. what application is this(what does the app do)?
+2. is it about only frontend, backend or both?
+3. does it use both http and wss or both of them?
+4. what is unpack wrapper for destination?
+5. what is adding next sequence number to message envelope?
+6. what is placing it in destination output?
