@@ -1,5 +1,5 @@
 ## Project Structure
-src/
+`src/
     communication_lib/
         __init__.py
         message_handler.py
@@ -8,4 +8,4 @@ src/
         ws_handler.py
         sequence_manager.py
         error_handler.py
-    main.py
+    main.py`
