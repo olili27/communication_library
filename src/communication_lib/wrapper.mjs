@@ -7,7 +7,8 @@ export class PayloadWrapper {
         return {
             ...payload,
             "destination": destination,
-            sequenceNumber: this.sequenceManager.getNextSequenceNumber()
+            sequenceNumber: this.sequenceManager.getNextSequenceNumber(),
+            reply: ""
         }
     }
 

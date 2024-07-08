@@ -19,7 +19,7 @@ class HttpHandler {
         this.#xhr.setRequestHeader("Content-Type", "application/json");
 
         this.#xhr.onerror = function() {
-            console.log("there was an error!");
+            onErrorCallback();
             return
         }
         
