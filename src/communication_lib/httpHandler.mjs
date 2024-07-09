@@ -1,4 +1,4 @@
-class HttpHandler {
+export class HttpHandler {
     #xhr = new XMLHttpRequest();
 
     #isStatusBetween200InclusiveAnd300(status) {

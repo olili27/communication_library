@@ -1,4 +1,4 @@
-class WebsocketHandler {
+export class WebsocketHandler {
     constructor(url) {
         this.socket = new WebSocket(url);
     }
@@ -10,6 +10,10 @@ class WebsocketHandler {
 
         this.onmessage = function(event) {
             console.log(event.data);
+        }
+
+        this.onerror = function() {
+            console.log("error occurred");
         }
 
         this.sendMessage(JSON.stringify(message));
