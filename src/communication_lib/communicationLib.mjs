@@ -6,5 +6,16 @@ import { QueueManger } from "./destinationQueueManager.mjs"
 
 
 class CommunicationLib {
-    #httpHandler = ""
+    #httpHandler = "";
+    isOpen = true;
+
+    constructor(errorCallback) {
+        this.errorCallback = errorCallback;
+        this.sequenceManager = new QueueManger();
+        this.payloadWrapper = new PayloadWrapper(this.sequenceManager);
+        this.websocketHandler = new WebsocketHandler();
+        this.httpHandler = new HttpHandler();
+    }
+
+
 }
