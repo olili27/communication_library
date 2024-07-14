@@ -1,5 +1,8 @@
 export class HttpHandler {
-    #xhr = new XMLHttpRequest();
+    #xhr
+    constructor() {
+        this.#xhr = new XMLHttpRequest();
+    }
 
     #isStatusBetween200InclusiveAnd300(status) {
         return status >= 200 && status < 300;
@@ -27,8 +30,8 @@ export class HttpHandler {
 
       
         this.#xhr.onload = function() {
-            console.log(self.#xhr.readyState);
-            console.log(self.#xhr.status);
+            // console.log(self.#xhr.readyState);
+            // console.log(self.#xhr.status);
             if(self.#xhr.status != 200) {
                 onErrorCallback(
                   `server returned error code: ${self.#xhr.status}`
@@ -41,13 +44,12 @@ export class HttpHandler {
         }
 
         this.#xhr.onerror = function (e) {
-            console.log(payload);
             if (self.#xhr.status == 0) {
                 onErrorCallback("server could not process request")
                 return
             } 
-            console.log(self.#xhr.readyState);
-        console.log(self.#xhr.status);
+        //     console.log(self.#xhr.readyState);
+        // console.log(self.#xhr.status);
         onErrorCallback(e);
         return;
         };
