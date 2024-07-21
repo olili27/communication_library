@@ -1,56 +1,52 @@
 export class WebsocketHandler {
-    constructor(url) {
-        this.socket = new WebSocket(url);
-        // this.replies = [];
+  constructor(url) {
+    this.socket = new WebSocket(url);
+
+    this.socket.onopen = function () {
+      console.log("connected successfully...");
+    };
+
+    this.socket.onmessage = this.handleMessage.bind(this);
+
+    this.socket.onerror = function (event) {
+      console.log("error occurred", event);
+    };
+
+    // socket.onclose = function () {
+    //   console.log("Connection closed...");
+    // };
+  }
+
+
+  sendMessage(message) {
+    if (this.socket.readyState == 1) {
+      this.socket.send(JSON.stringify(message));
     }
+     else {
+      this.socket = new WebSocket(message.destination);
+      
+      let self = this.socket;
 
+      this.socket.onopen = function () {
+        console.log("connected successfully...");
+        self.send(JSON.stringify(message));
+      };
 
-    
-    sendMessage(message) {
-        const self = this;
-        
-        this.socket.onopen = function() {
-            console.log("connected successfully...");
-            self.socket.send(JSON.stringify(message));
-        }
+       this.socket.onmessage = this.handleMessage.bind(this);
 
-        //  this.socket.onmessage = function (event) {
-        //    self.replies.push(event.data);
-        //    console.log(event.data);
-        //    console.log(self.replies);
-        //  };
-        
-        this.onerror()
-    }
-
-    receiveReply() {
-      const self = this;
-
-      console.log(this.socket);
-
-         this.socket.onmessage = function (event) {
-          // self.replies.push(event.data);
-           console.log(event.data);
-          //  console.log(self.replies);
-
-          self.socket.close();// self.onClose() 
-         };
-
-         this.onerror()
-    }
-
-    onClose() {
-      const self = this;
-       this.socket.onclose = function () {
-        self.socket.close();
-         console.log("Connection closed...");
+       this.socket.onerror = function (event) {
+         console.log("error occurred", event);
        };
+
     }
-    onerror() {
-         this.socket.onerror = function () {
-           console.log("error occurred");
-         };
-    }
+  }
+
+  handleMessage(event) {
+    // console.log(event);
+    // const data = JSON.parse(event.data);
+    // console.log(this.socket.readyState);
+    console.log("received data: ", event.data);
+  }
 }
 
 
