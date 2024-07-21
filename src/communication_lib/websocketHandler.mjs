@@ -11,10 +11,6 @@ export class WebsocketHandler {
     this.socket.onerror = function (event) {
       console.log("error occurred", event);
     };
-
-    // socket.onclose = function () {
-    //   console.log("Connection closed...");
-    // };
   }
 
 
@@ -42,10 +38,7 @@ export class WebsocketHandler {
   }
 
   handleMessage(event) {
-    // console.log(event);
-    // const data = JSON.parse(event.data);
-    // console.log(this.socket.readyState);
-    console.log("received data: ", event.data);
+    console.log("received data: ", JSON.parse(event.data));
   }
 }
 

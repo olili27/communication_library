@@ -3,12 +3,12 @@ export class PayloadWrapper {
         this.sequenceManager = sequenceManager
     }
 
-    wrapPayload(payload, destination) {
+    wrapPayload(payload, destination, replyTo) {
         return {
             ...payload,
-            "destination": destination,
+            replyTo,
+            destination,
             sequenceNumber: this.sequenceManager.getNextSequenceNumber(),
-            reply: ""
         }
     }
 
