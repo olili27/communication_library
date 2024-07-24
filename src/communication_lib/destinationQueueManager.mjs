@@ -1,18 +1,29 @@
 export class QueueManger {
     constructor() {
-        this.queues = {}
+        this.httpQueue = {};
+        this.wssQueue = {};
     }
 
-    getQueue(destination) {
-          return this.queues[destination]
-    }
-
-    addToDestinationQueue(message, destination) {
-        if(!this.getQueue(destination)) {
-            this.queues[destination] = []
+    getQueue(destination, errorCallback) {
+        if(destination.startsWith("http")) {
+            return this.httpQueue[destination];
+        } else if (destination.startsWith("ws")) {
+            return this.wssQueue[destination];
         }
+    }
 
-       this.getQueue(destination).push(message)
+    addToDestinationQueue(wrappedMessage, errorCallback) {
+        if (destination.startsWith("http")) {
+            if (!this.getQueue(destination)) {
+              this.httpQueue[destination] = [];
+            }
+          this.getQueue(destination).push(wrappedMessage);
+        } else if (destination.startsWith("ws")) {
+            if (!this.getQueue(destination)) {
+              this.wssQueue[destination] = [];
+            }
+          this.getQueue(destination).push(wrappedMessage);
+        }
     }
 
     isEmpty(queue) {
@@ -24,9 +35,6 @@ export class QueueManger {
     }
 
     removeFromDestinationQueue(destination) {
-        if (this.getQueue(destination)) {
-          return this.getQueue(destination).shift()
-        }
-        return undefined
+        return this.getQueue(destination).shift()
     }
 }
