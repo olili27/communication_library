@@ -1,28 +1,24 @@
 export class QueueManger {
     constructor() {
-        this.httpQueue = {};
-        this.wssQueue = {};
+        this.queues = {
+            http: [],
+            wss: []
+        };
     }
 
     getQueue(destination, errorCallback) {
         if(destination.startsWith("http")) {
-            return this.httpQueue[destination];
+            return this.queues["http"];
         } else if (destination.startsWith("ws")) {
-            return this.wssQueue[destination];
+            return this.queues["wss"];
         }
     }
 
     addToDestinationQueue(wrappedMessage, errorCallback) {
         if (destination.startsWith("http")) {
-            if (!this.getQueue(destination)) {
-              this.httpQueue[destination] = [];
-            }
-          this.getQueue(destination).push(wrappedMessage);
+          this.getQueue(destination, errorCallback).push(wrappedMessage);
         } else if (destination.startsWith("ws")) {
-            if (!this.getQueue(destination)) {
-              this.wssQueue[destination] = [];
-            }
-          this.getQueue(destination).push(wrappedMessage);
+          this.getQueue(destination, errorCallback).push(wrappedMessage);
         }
     }
 
@@ -34,7 +30,7 @@ export class QueueManger {
         }
     }
 
-    removeFromDestinationQueue(destination) {
-        return this.getQueue(destination).shift()
+    popFromQueue(protocol) {
+        return this.getQueue(protocol).shift()
     }
 }
