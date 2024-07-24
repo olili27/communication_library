@@ -3,18 +3,19 @@ export class PayloadWrapper {
         this.sequenceManager = sequenceManager
     }
 
-    wrapPayload(payload, destination, replyTo) {
+    wrapPayload(message, destination, replyTo) {
         return {
-            ...payload,
+            message,
             replyTo,
             destination,
             sequenceNumber: this.sequenceManager.getNextSequenceNumber(),
         }
     }
 
-    unwrapPayload(message) {
+    unwrapPayload(wrappedMessage) {
         return {
-            payload: message.payload
-        }
+          message: wrappedMessage.message,
+          replyTo: wrappedMessage.replyTo
+        };
     }
 }
