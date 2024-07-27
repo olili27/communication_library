@@ -5,7 +5,7 @@ export class PayloadWrapper {
 
     wrapPayload(message, destination, replyTo) {
         return {
-            message,
+            ...message,
             replyTo,
             destination,
             sequenceNumber: this.sequenceManager.getNextSequenceNumber(),
