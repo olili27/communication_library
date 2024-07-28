@@ -23,15 +23,13 @@ export class HttpHandler {
 
         const self = this;
 
-        this.#xhr.onreadystatechange = function (e) {
-          console.log(self.#xhr.readyState);
-          console.log(self.#xhr.status);
-        };
+        // this.#xhr.onreadystatechange = function (e) {
+        //   console.log(self.#xhr.readyState);
+        //   console.log(self.#xhr.status);
+        // };
 
       
         this.#xhr.onload = function() {
-            // console.log(self.#xhr.readyState);
-            // console.log(self.#xhr.status);
             if(self.#xhr.status != 200) {
                 onErrorCallback(
                   `server returned error code: ${self.#xhr.status}`
@@ -48,8 +46,7 @@ export class HttpHandler {
                 onErrorCallback("server could not process request")
                 return
             } 
-        //     console.log(self.#xhr.readyState);
-        // console.log(self.#xhr.status);
+
         onErrorCallback(e);
         return;
         };

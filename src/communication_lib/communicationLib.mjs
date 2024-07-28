@@ -54,8 +54,8 @@ export class CommunicationLib {
       let wrappedMessage = this.queueManager.popFromQueue("ws");
 
       if(wrappedMessage) {
-        this.websocketHandler = new WebsocketHandler(wrappedMessage.destination)
-        this.websocketHandler.sendMessage(wrappedMessage);
+        this.websocketHandler = new WebsocketHandler(wrappedMessage.destination, this.errorCallback)
+        this.websocketHandler.sendMessage(wrappedMessage, this.errorCallback);
       }
   }
 }

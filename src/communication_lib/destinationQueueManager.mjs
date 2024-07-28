@@ -12,14 +12,22 @@ export class QueueManger {
         } else if (destination.startsWith("ws")) {
             return this.queues["wss"];
         }
+        return errorCallback("only http and ws are allowed!");
     }
 
     addToDestinationQueue(wrappedMessage, errorCallback) {
-        if (destination.startsWith("http")) {
-          this.getQueue(destination, errorCallback).push(wrappedMessage);
-        } else if (destination.startsWith("ws")) {
-          this.getQueue(destination, errorCallback).push(wrappedMessage);
+        if (wrappedMessage.destination.startsWith("http")) {
+          this.getQueue(wrappedMessage.destination, errorCallback).push(
+            wrappedMessage
+          );
+          return;
+        } else if (wrappedMessage.destination.startsWith("ws")) {
+          this.getQueue(wrappedMessage.destination, errorCallback).push(
+            wrappedMessage
+          );
+          return;
         }
+        errorCallback("only http and ws are allowed!");
     }
 
     isEmpty(queue) {
