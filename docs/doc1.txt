@@ -1,0 +1,8 @@
+1.XMLHttpRequest API for making HTTP requests
+- less complexity. no use of promises or async/await
+
+2.WebSocket browser API to create WebSocket clients
+- less complexity. 
+- can set my request timeout
+- can get progress events
+- no full page refreshing
